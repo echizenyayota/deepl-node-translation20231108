@@ -9,17 +9,21 @@ const App = () => {
 
   const [inputLanguage, setInputLanguage] = useState("English(en)");
   const [outputLanguage, setOutputLanguage] = useState("Japanese(ja)");
+  const [showModal, setShowModal] = useState(null);
 
   const handleClick = () => {
     setInputLanguage(outputLanguage);
     setOutputLanguage(inputLanguage);
   }
 
+  console.log("showModal", showModal);
+
   return (
     <div className="app">
       <TextBox
         selectedLanguage={inputLanguage} 
         style="input"
+        setShowModal={setShowModal}
       />
       <div className="arrow-container" onClick={handleClick}>
         <Arrows />
@@ -27,6 +31,7 @@ const App = () => {
       <TextBox
         selectedLanguage={outputLanguage}
         style="output"
+        setShowModal={setShowModal}
       />
     </div>
   );
