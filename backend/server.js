@@ -15,6 +15,12 @@ app.use(cors());
 
 app.listen(PORT, () => console.log("Server running on PORT " + PORT));
 
+app.get("/", (req, res) => {
+  res.status(200).json({
+    message: "Testing whether the API works"
+  })
+});
+
 app.get("/languages", async(req, res) => {
   const authKey = process.env.DEEPL_API_KEY;
   const translator = new deepl.Translator(authKey);
