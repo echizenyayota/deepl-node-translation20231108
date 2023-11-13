@@ -10,7 +10,7 @@ const Modal = ({ setShowModal, languages }) => {
   
   const handleChange = (e) => {
     setSearchedLanguage(e.target.value);
-  };
+  }
 
   const handleClick = () => {
     setShowModal(null);
