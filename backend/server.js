@@ -34,3 +34,16 @@ app.get("/languages", async(req, res) => {
   }
 
 });
+
+app.get("/translation", async(req, res) => {
+  const authKey = process.env.DEEPL_API_KEY;
+  const translator = new deepl.Translator(authKey);
+
+  try {
+    const result = await translator.translateText("good evening", null, "ja");
+    res.status(200).json(result.text);
+  } catch(err) {
+    console.log(err);
+    res.status(500).json({message: err})
+  }
+});
