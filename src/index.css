@@ -60,7 +60,7 @@ input {
 
 .select-drop-down .down-arrow svg {
   position: relative;
-  left: 265px;
+  left: 245px;
   top: -33px;
   width: 26px;
   height: 26px;
@@ -134,4 +134,10 @@ input {
 
 .list-item {
   display: flex;
+}
+
+.button-container {
+  color: #191a1c;
+  padding: 18px;
+  height: 25px;
 }

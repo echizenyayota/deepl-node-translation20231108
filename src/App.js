@@ -46,6 +46,9 @@ const App = () => {
           style="output"
           setShowModal={setShowModal}
         />
+        <div className="button-container">
+          <Button />
+        </div>
       </>}
       {showModal && <Modal 
         setShowModal={setShowModal}
