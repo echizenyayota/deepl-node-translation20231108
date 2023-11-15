@@ -11,6 +11,8 @@ const App = () => {
   const [outputLanguage, setOutputLanguage] = useState("Japanese(ja)");
   const [showModal, setShowModal] = useState(null);
   const [languages, setLanguages] = useState(null);
+  const [textToTranslate, setTextToTranslate] = useState("");
+  const [translatedText, setTranslatedText] = useState("");
 
   const getLanguages = async() => {
     const response = await axios.get("http://localhost:8000/languages");
@@ -37,6 +39,9 @@ const App = () => {
           selectedLanguage={inputLanguage} 
           style="input"
           setShowModal={setShowModal}
+          textToTranslate={textToTranslate}
+          setTextToTranslate={setTextToTranslate}
+          setTranslatedText={setTranslatedText}
         />
         <div className="arrow-container" onClick={handleClick}>
           <Arrows />
@@ -45,6 +50,7 @@ const App = () => {
           selectedLanguage={outputLanguage}
           style="output"
           setShowModal={setShowModal}
+          translatedText={translatedText}
         />
         <div className="button-container">
           <Button />
