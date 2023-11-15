@@ -36,11 +36,12 @@ app.get("/languages", async(req, res) => {
 });
 
 app.get("/translation", async(req, res) => {
+  const {textToTranslate, outputLanguage, inputLanguage} = req.query
   const authKey = process.env.DEEPL_API_KEY;
   const translator = new deepl.Translator(authKey);
 
   try {
-    const result = await translator.translateText("good evening", null, "ja");
+    const result = await translator.translateText(textToTranslate, inputLanguage, outputLanguage);
     res.status(200).json(result.text);
   } catch(err) {
     console.log(err);
