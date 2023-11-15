@@ -37,11 +37,13 @@ textarea {
   margin-top: 10px;
 }
 
-input {
+.select-drop-down span {
+  display: block;
+  padding: 11px 15px;
   border: 1px solid #818588;
   border-radius: 5px;
   box-sizing: border-box;
-  color: #bdc1c6;
+  color: #f8c4ce;
   font-size: 14px;
   height: 40px;
   background-color: transparent;

@@ -14,12 +14,33 @@ const App = () => {
   const [textToTranslate, setTextToTranslate] = useState("");
   const [translatedText, setTranslatedText] = useState("");
 
+  const extractLanguageCode = (languageString) => {
+    const match = languageString.match(/\((\w+)\)/); // This regex matches the content within parentheses.
+    if (match && match[1]) {
+      return match[1]; // Returns the matched language code 
+    }
+    return null; // Return null if no match is found
+  }
+
   const getLanguages = async() => {
     const response = await axios.get("http://localhost:8000/languages");
     setLanguages(response.data);
   }
 
-  console.log("languages", languages);
+  const translate = async () => {
+    const data = {
+      textToTranslate,
+      outputLanguage: extractLanguageCode(outputLanguage),
+      inputLanguage: extractLanguageCode(inputLanguage),
+    }
+
+    const response = await axios.get("http://localhost:8000/translation", {
+      params: data,
+    });
+
+    // response.data returns in format {text: "", detectSourceLanguage: ""}
+    setTranslatedText(response.data?.text);
+  }
 
   useEffect(() => {
     getLanguages();
@@ -29,8 +50,6 @@ const App = () => {
     setInputLanguage(outputLanguage);
     setOutputLanguage(inputLanguage);
   }
-
-  console.log("showModal", showModal);
 
   return (
     <div className="app">
@@ -52,7 +71,7 @@ const App = () => {
           setShowModal={setShowModal}
           translatedText={translatedText}
         />
-        <div className="button-container">
+        <div className="button-container" onClick={translate}>
           <Button />
         </div>
       </>}

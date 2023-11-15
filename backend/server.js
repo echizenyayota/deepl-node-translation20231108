@@ -4,7 +4,6 @@ import * as deepl from "deepl-node";
 const require = createRequire(import.meta.url);
 
 const PORT = 8000;
-const axios = require("axios").default;
 const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
@@ -18,16 +17,16 @@ app.listen(PORT, () => console.log("Server running on PORT " + PORT));
 app.get("/", (req, res) => {
   res.status(200).json({
     message: "Testing whether the API works"
-  })
+  });
 });
 
 app.get("/languages", async(req, res) => {
   const authKey = process.env.DEEPL_API_KEY;
   const translator = new deepl.Translator(authKey);
-  const sourceLanguage = await translator.getSourceLanguages();
+  const sourceLanguages = await translator.getSourceLanguages();
 
   try {
-    res.status(200).json(sourceLanguage.map(lang => `${lang.name}(${lang.code})`));
+    res.status(200).json(sourceLanguages.map(lang => `${lang.name}(${lang.code})`));
   } catch (err) {
     console.log(err);
     res.status(500).json({message: err});
@@ -42,7 +41,7 @@ app.get("/translation", async(req, res) => {
 
   try {
     const result = await translator.translateText(textToTranslate, inputLanguage, outputLanguage);
-    res.status(200).json(result.text);
+    res.status(200).json(result);
   } catch(err) {
     console.log(err);
     res.status(500).json({message: err})
